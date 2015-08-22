@@ -1,0 +1,219 @@
+---
+kind: List
+apiVersion: v1
+id: zookeper-setup
+items:
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: zookeeper-1
+    labels:
+      name: zookeeper-1-svc
+  spec:
+    ports:
+    - name: followers
+      port: 2888
+      targetPort: 2888
+    - name: election
+      port: 3888
+      targetPort: 3888
+    selector:
+      name: zookeeper-pod
+      server-id: '1'
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: zookeeper-2
+    labels:
+      name: zookeeper-2-svc
+  spec:
+    ports:
+    - name: followers
+      port: 2888
+      targetPort: 2888
+    - name: election
+      port: 3888
+      targetPort: 3888
+    selector:
+      name: zookeeper-pod
+      server-id: '2'
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: zookeeper-3
+    labels:
+      name: zookeeper-3-svc
+  spec:
+    ports:
+    - name: followers
+      port: 2888
+      targetPort: 2888
+    - name: election
+      port: 3888
+      targetPort: 3888
+    selector:
+      name: zookeeper-pod
+      server-id: '3'
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: zookeeper
+    labels:
+      name: zookeeper-svc
+  spec:
+    ports:
+    - name: client
+      port: 2181
+      targetPort: 2181
+    selector:
+      name: zookeeper-pod
+- kind: ReplicationController
+  apiVersion: v1
+  metadata:
+    labels:
+      name: zookeeper-1-rc
+    name: zookeeper-1-rc
+  spec:
+    replicas: 1
+    selector:
+      name: zookeeper-pod
+      server-id: '1'
+    template:
+      metadata:
+        name: zookeeper-1-pod
+        labels:
+          name: zookeeper-pod
+          server-id: '1'
+      spec:
+        containers:
+        - name: server
+          image: 192.168.200.64:5000/drama/zookeeper:v1
+          env:
+          - name: SERVER_ID
+            value: '1'
+          - name: MAX_SERVERS
+            value: '3'
+          - name: JVMFLAGS
+            value: "-Xmx1536m"
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          ports:
+          - containerPort: 2181
+          - containerPort: 2888
+          - containerPort: 3888
+          volumeMounts:
+          - name: data
+            mountPath: /zookeeper_data/data
+          - name: txnlog
+            mountPath: /zookeeper_data/txnlog
+          - name: log
+            mountPath: /zookeeper_data/log
+        volumes:
+        - name: data
+          emptyDir: {}
+        - name: txnlog
+          emptyDir: {}
+        - name: log
+          emptyDir: {}
+- kind: ReplicationController
+  apiVersion: v1
+  metadata:
+    labels:
+      name: zookeeper-2-rc
+    name: zookeeper-2-rc
+  spec:
+    replicas: 1
+    selector:
+      name: zookeeper-pod
+      server-id: '2'
+    template:
+      metadata:
+        name: zookeeper-2-pod
+        labels:
+          name: zookeeper-pod
+          server-id: '2'
+      spec:
+        containers:
+        - name: server
+          image: 192.168.200.64:5000/drama/zookeeper:v1
+          env:
+          - name: SERVER_ID
+            value: '2'
+          - name: MAX_SERVERS
+            value: '3'
+          - name: JVMFLAGS
+            value: "-Xmx1536m"
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          ports:
+          - containerPort: 2181
+          - containerPort: 2888
+          - containerPort: 3888
+          volumeMounts:
+          - name: data
+            mountPath: /zookeeper_data/data
+          - name: txnlog
+            mountPath: /zookeeper_data/txnlog
+          - name: log
+            mountPath: /zookeeper_data/log
+        volumes:
+        - name: data
+          emptyDir: {}
+        - name: txnlog
+          emptyDir: {}
+        - name: log
+          emptyDir: {}
+- kind: ReplicationController
+  apiVersion: v1
+  metadata:
+    labels:
+      name: zookeeper-3-rc
+    name: zookeeper-3-rc
+  spec:
+    replicas: 1
+    selector:
+      name: zookeeper-pod
+      server-id: '3'
+    template:
+      metadata:
+        name: zookeeper-3-pod
+        labels:
+          name: zookeeper-pod
+          server-id: '3'
+      spec:
+        containers:
+        - name: server
+          image: 192.168.200.64:5000/drama/zookeeper:v1
+          env:
+          - name: SERVER_ID
+            value: '3'
+          - name: MAX_SERVERS
+            value: '3'
+          - name: JVMFLAGS
+            value: "-Xmx1536m"
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          ports:
+          - containerPort: 2181
+          - containerPort: 2888
+          - containerPort: 3888
+          volumeMounts:
+          - name: data
+            mountPath: /zookeeper_data/data
+          - name: txnlog
+            mountPath: /zookeeper_data/txnlog
+          - name: log
+            mountPath: /zookeeper_data/log
+        volumes:
+        - name: data
+          emptyDir: {}
+        - name: txnlog
+          emptyDir: {}
+        - name: log
+          emptyDir: {}
