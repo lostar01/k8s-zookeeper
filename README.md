@@ -7,6 +7,7 @@
 * Teardown
 
         ./teardown.sh [--namespace=xxx]
+
 -----
 ##### Notes:
 * Enable zookeeper cluster nodes' intra communication via 3 services (1 service for 1 pod: zookeeper-1, zookeeper-2, and zookeeper-3)
@@ -29,6 +30,7 @@
             [current-context: develop]
             kubectl create -f zookeeper.yaml --namespace=develop
         Fully isolated among above 3 namespaces
+
 -----
 ##### TODO:
 * Kubernetes 1.0.x doesn't support emptyDir volumes for containers running as non-root (it's commit in master branch, not v1.0.0 branch, refer to https://github.com/kubernetes/kubernetes/pull/9384 & https://github.com/kubernetes/kubernetes/issues/12627). Use root rather than zookeeper user instead at this moment.
