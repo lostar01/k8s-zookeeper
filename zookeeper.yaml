@@ -6,6 +6,19 @@ items:
 - kind: Service
   apiVersion: v1
   metadata:
+    name: zookeeper
+    labels:
+      name: zookeeper-svc
+  spec:
+    ports:
+    - name: client
+      port: 2181
+      targetPort: 2181
+    selector:
+      name: zookeeper-pod
+- kind: Service
+  apiVersion: v1
+  metadata:
     name: zookeeper-1
     labels:
       name: zookeeper-1-svc
@@ -54,19 +67,6 @@ items:
     selector:
       name: zookeeper-pod
       server-id: '3'
-- kind: Service
-  apiVersion: v1
-  metadata:
-    name: zookeeper
-    labels:
-      name: zookeeper-svc
-  spec:
-    ports:
-    - name: client
-      port: 2181
-      targetPort: 2181
-    selector:
-      name: zookeeper-pod
 - kind: ReplicationController
   apiVersion: v1
   metadata:
