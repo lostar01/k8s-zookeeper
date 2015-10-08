@@ -6,24 +6,14 @@ items:
 - kind: Service
   apiVersion: v1
   metadata:
-    name: zookeeper
-    labels:
-      name: zookeeper-svc
-  spec:
-    ports:
-    - name: client
-      port: 2181
-      targetPort: 2181
-    selector:
-      name: zookeeper-pod
-- kind: Service
-  apiVersion: v1
-  metadata:
     name: zookeeper-1
     labels:
       name: zookeeper-1-svc
   spec:
     ports:
+    - name: client
+      port: 2181
+      targetPort: 2181
     - name: followers
       port: 2888
       targetPort: 2888
@@ -41,6 +31,9 @@ items:
       name: zookeeper-2-svc
   spec:
     ports:
+    - name: client
+      port: 2181
+      targetPort: 2181
     - name: followers
       port: 2888
       targetPort: 2888
@@ -58,6 +51,9 @@ items:
       name: zookeeper-3-svc
   spec:
     ports:
+    - name: client
+      port: 2181
+      targetPort: 2181
     - name: followers
       port: 2888
       targetPort: 2888
@@ -87,7 +83,7 @@ items:
       spec:
         containers:
         - name: server
-          image: quay.io/draft/k8s-zookeeper:v1
+          image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
           env:
           - name: SERVER_ID
             value: '1'
@@ -137,7 +133,7 @@ items:
       spec:
         containers:
         - name: server
-          image: quay.io/draft/k8s-zookeeper:v1
+          image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
           env:
           - name: SERVER_ID
             value: '2'
@@ -187,7 +183,7 @@ items:
       spec:
         containers:
         - name: server
-          image: quay.io/draft/k8s-zookeeper:v1
+          image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
           env:
           - name: SERVER_ID
             value: '3'

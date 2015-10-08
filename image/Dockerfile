@@ -8,6 +8,10 @@ RUN rpm --rebuilddb && yum install -y java-1.7.0-openjdk-headless wget tar && yu
     && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
     && mv /opt/zookeeper-${ZOOKEEPER_VERSION} /opt/zookeeper
 
+RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
+    && mv jq-linux64 /usr/bin/jq \
+    && chmod +x /usr/bin/jq
+
 ENV PATH /opt/zookeeper/bin:$PATH
 WORKDIR /opt/zookeeper
 
