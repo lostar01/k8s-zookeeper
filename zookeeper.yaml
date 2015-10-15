@@ -84,6 +84,10 @@ items:
         containers:
         - name: server
           image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
           env:
           - name: SERVER_ID
             value: '1'
@@ -134,6 +138,10 @@ items:
         containers:
         - name: server
           image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
           env:
           - name: SERVER_ID
             value: '2'
@@ -184,6 +192,10 @@ items:
         containers:
         - name: server
           image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
           env:
           - name: SERVER_ID
             value: '3'
