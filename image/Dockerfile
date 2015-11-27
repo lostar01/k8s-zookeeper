@@ -29,6 +29,6 @@ RUN chmod a+x ./bin/config-and-run.sh && \
 
 VOLUME ["/zookeeper_data/data","/zookeeper_data/txnlog","/zookeeper_data/log"]
 
-#USER zookeeper
+USER zookeeper
 
 CMD ["/opt/zookeeper/bin/config-and-run.sh"]
