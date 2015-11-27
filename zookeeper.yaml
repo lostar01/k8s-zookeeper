@@ -83,7 +83,7 @@ items:
       spec:
         containers:
         - name: server
-          image: quay.io/draft/k8s-zookeeper:3.4.6_v1.0
+          image: quay.io/draft/k8s-zookeeper:3.4.6_v1.1
           resources:
             requests:
               cpu: 1

@@ -32,7 +32,7 @@
 
 -----
 ##### TODO:
-* Kubernetes 1.0.x doesn't support emptyDir volumes for containers running as non-root (it's commit in master branch, not v1.0.0 branch, refer to https://github.com/kubernetes/kubernetes/pull/9384 & https://github.com/kubernetes/kubernetes/issues/12627). Use root rather than zookeeper user instead at this moment.
+* Kubernetes 1.0.x doesn't support emptyDir volumes for containers running as non-root (it's commit in master branch, not v1.0.0 branch, refer to https://github.com/kubernetes/kubernetes/pull/9384 & https://github.com/kubernetes/kubernetes/issues/12627). Use root rather than zookeeper user instead at this moment. (Done: It's verified OK in kubernetes 1.1.1 in using zookeeper user instead of root)
 * Try to spread zookeeper pods (created by different replication controllers, but using same service for external clients) on different nodes by experimenting kube-scheduler.service with policy configuration.
     https://github.com/kubernetes/kubernetes/blob/master/docs/admin/kube-scheduler.md
     https://docs.openshift.org/latest/admin_guide/scheduler.html#use-cases 
