@@ -1,4 +1,6 @@
 # k8s-zookeeper: zookeeper cluster of DRAFT on Kubernetes
+[![Docker Repository on Quay](https://quay.io/repository/draft/k8s-zookeeper/status "Docker Repository on Quay")](https://quay.io/repository/draft/k8s-zookeeper)
+
 ##### Steps:
 * Build docker image via Quay.io
 * Create kubernetes pods & services
