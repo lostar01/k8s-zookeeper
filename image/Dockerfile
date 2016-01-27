@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM centos:7
 
 ENV ZOOKEEPER_VERSION 3.4.6
 EXPOSE 2181 2888 3888
@@ -28,6 +28,8 @@ RUN chmod a+x ./bin/config-and-run.sh && \
     chmod o+w -R /opt/zookeeper /zookeeper_data
 
 VOLUME ["/zookeeper_data/data","/zookeeper_data/txnlog","/zookeeper_data/log"]
+
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 USER zookeeper
 
